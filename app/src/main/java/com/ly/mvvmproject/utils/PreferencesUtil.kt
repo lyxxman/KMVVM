@@ -1,8 +1,9 @@
-package com.ly.mvvmbase.utils
+package com.ly.mvvmproject.utils
 
 import android.content.Context
 import android.content.SharedPreferences
 import com.ly.mvvmbase.base.BaseApplication
+import com.ly.mvvmproject.base.MvvmApplication
 
 /**
  * @author ly
@@ -13,7 +14,7 @@ object PreferencesUtil {
     val APP_SHARE_INFO: String = "share_info"
     val SHARE_ACCESS_TOKEN: String = "access-token"
     private val prefs: SharedPreferences by lazy {
-        BaseApplication.sIntance?.applicationContext!!.getSharedPreferences(
+        MvvmApplication.sIntance?.applicationContext!!.getSharedPreferences(
             APP_SHARE_INFO,
             Context.MODE_PRIVATE
         )

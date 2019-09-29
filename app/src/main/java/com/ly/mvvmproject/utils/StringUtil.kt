@@ -1,6 +1,6 @@
-package com.ly.mvvmbase.utils
+package com.ly.mvvmproject.utils
 
-import com.ly.mvvmbase.base.BaseApplication
+import com.ly.mvvmproject.base.MvvmApplication
 
 
 object StringUtil {
@@ -16,6 +16,6 @@ object StringUtil {
      * 获取string资源下面的字符串
      */
     fun getString(id:Int):String{
-        return BaseApplication.sIntance!!.resources.getString(id)
+        return MvvmApplication.sIntance!!.resources.getString(id)
     }
 }

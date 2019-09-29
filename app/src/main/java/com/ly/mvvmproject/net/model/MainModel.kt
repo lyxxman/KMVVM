@@ -1,6 +1,6 @@
 package com.ly.mvvmproject.net.model
 
-import com.ly.mvvmbase.base.ExceptionHandler
+import com.ly.mvvmproject.net.exception.ExceptionHandler
 import com.ly.mvvmbase.model.BaseModel
 import com.ly.mvvmbase.net.BaseResponse
 import com.ly.mvvmbase.net.NetRetroift2

@@ -1,7 +1,7 @@
-package com.ly.mvvmbase.net.interceptor
+package com.ly.mvvmproject.net.interceptor
 
-import com.ly.mvvmbase.utils.PreferencesUtil
-import com.ly.mvvmbase.utils.StringUtil
+import com.ly.mvvmproject.utils.PreferencesUtil
+import com.ly.mvvmproject.utils.StringUtil
 import okhttp3.Interceptor
 import okhttp3.Request
 import okhttp3.Response

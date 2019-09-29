@@ -1,10 +1,8 @@
-package com.ly.mvvmbase.base
+package com.ly.mvvmproject.net.exception
 
-import android.icu.text.IDNA
-import com.ly.mvvmbase.R
-import com.ly.mvvmbase.net.BaseResponse
 import com.ly.mvvmbase.net.ErrorData
-import com.ly.mvvmbase.utils.StringUtil
+import com.ly.mvvmproject.R
+import com.ly.mvvmproject.utils.StringUtil
 import retrofit2.HttpException
 import java.net.ConnectException
 import java.net.SocketTimeoutException
@@ -16,9 +14,11 @@ object ExceptionHandler {
 
     fun onError(url:String,e: Throwable?): ErrorData {
         if (e is ConnectException || e is UnknownHostException || e is SocketTimeoutException || e is HttpException) run {
-            return ErrorData(url,UNET_ERROR, StringUtil.getString(R.string.app_error))
+            return ErrorData(url,
+                UNET_ERROR, StringUtil.getString(R.string.app_error))
         }
-        return ErrorData(url,APP_ERROR, StringUtil.getString(R.string.app_error))
+        return ErrorData(url,
+            APP_ERROR, StringUtil.getString(R.string.app_error))
     }
 
 

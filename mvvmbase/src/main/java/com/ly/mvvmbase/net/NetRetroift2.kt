@@ -1,6 +1,5 @@
 package com.ly.mvvmbase.net
 
-import com.ly.mvvm.base.AppConfig
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -14,7 +13,7 @@ class NetRetroift2 private constructor() {
     private var okHttpClient: OkHttpClient? = null
     private var interceptors: MutableList<Interceptor> = mutableListOf()
     var timeOut = 5L
-
+    var baseUrl:String=""
 
     companion object {
 
@@ -32,7 +31,7 @@ class NetRetroift2 private constructor() {
                 .build()
 
         retrofit = Retrofit.Builder()
-            .baseUrl(AppConfig.BASE_URL)
+            .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .client(okHttpClient)
