@@ -1,5 +1,11 @@
 package com.ly.mvvmbase.net
 
+/**
+ * @author ly
+ * @description 成果结果返回封装类
+ * @date 2019年10月9日 11:22:00
+ * @version 1.0.0
+ */
 class SuccessData  {
 
     var url:String?=null

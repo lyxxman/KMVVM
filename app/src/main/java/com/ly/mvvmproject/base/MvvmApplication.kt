@@ -1,10 +1,10 @@
 package com.ly.mvvmproject.base
 
-import com.ly.mvvmbase.base.BaseApplication
+import android.app.Application
 import com.ly.mvvmbase.net.NetRetroift2
 import com.ly.mvvmproject.net.interceptor.TokenInterceptor
 
-class MvvmApplication : BaseApplication() {
+class MvvmApplication :Application() {
     companion object {
         var sIntance: MvvmApplication? = null
     }

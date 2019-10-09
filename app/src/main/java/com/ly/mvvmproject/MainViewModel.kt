@@ -2,16 +2,12 @@ package com.ly.mvvmproject
 
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
-import com.ly.mvvmbase.base.BaseApplication
-import com.ly.mvvmbase.model.BaseModel
-import com.ly.mvvmbase.model.BaseModel.*
-import com.ly.mvvmbase.net.BaseResponse
+import com.ly.mvvmbase.model.BaseModel.OnGetDataListener
 import com.ly.mvvmbase.net.ErrorData
 import com.ly.mvvmbase.net.SuccessData
 import com.ly.mvvmbase.viewmodel.BaseViewModel
 import com.ly.mvvmproject.net.bean.MainData
 import com.ly.mvvmproject.net.model.MainModel
-import javax.inject.Inject
 
 /**
  * @author ly
@@ -41,7 +37,7 @@ class MainViewModel(application: Application) : BaseViewModel<MainModel>(applica
     }
 
     override fun onError(data: ErrorData) {
-
+       errorLiveData!!.postValue(data)
     }
 
 

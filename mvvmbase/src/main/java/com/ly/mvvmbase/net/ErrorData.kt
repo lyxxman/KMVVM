@@ -6,7 +6,6 @@ class ErrorData {
     var message: String? = null
     var url: String? = null
     var pageIndex: Int = 0
-
     constructor(url: String, code: Int, message: String) {
         this.code = code
         this.message = message

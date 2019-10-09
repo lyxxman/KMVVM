@@ -3,7 +3,6 @@ package com.ly.mvvmproject.net.request
 import com.ly.mvvmbase.model.BaseModel
 import com.ly.mvvmbase.net.BaseResponse
 import com.ly.mvvmbase.net.SuccessData
-import com.ly.mvvmproject.net.bean.MainData
 import com.ly.mvvmproject.net.exception.ExceptionHandler
 import io.reactivex.Observable
 import io.reactivex.Observer

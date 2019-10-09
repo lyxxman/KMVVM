@@ -7,6 +7,12 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
+/**
+ * @author ly
+ * @description retrofit2封装类
+ * @date 2019年10月9日 11:18:51
+ * @version 1.0.0
+ */
 class NetRetroift2 private constructor() {
 
     lateinit var retrofit: Retrofit
@@ -16,7 +22,6 @@ class NetRetroift2 private constructor() {
     var baseUrl:String=""
 
     companion object {
-
         val mInstance by lazy(mode = LazyThreadSafetyMode.NONE) {
             NetRetroift2()
         }

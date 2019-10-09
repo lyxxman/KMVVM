@@ -2,7 +2,6 @@ package com.ly.mvvmproject.utils
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.ly.mvvmbase.base.BaseApplication
 import com.ly.mvvmproject.base.MvvmApplication
 
 /**

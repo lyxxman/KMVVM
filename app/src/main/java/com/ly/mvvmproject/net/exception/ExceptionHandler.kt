@@ -8,6 +8,12 @@ import java.net.ConnectException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 
+/**
+ * @author ly
+ * @name 异常拦截处理类
+ * @version 1.0.0
+ * @date 2019年10月9日 11:15:52
+ */
 object ExceptionHandler {
     const val APP_ERROR = -1 //app错误
     const val UNET_ERROR = -2 //无网络 网络错误

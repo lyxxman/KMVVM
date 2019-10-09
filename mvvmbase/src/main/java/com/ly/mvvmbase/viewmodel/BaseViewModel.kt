@@ -4,20 +4,26 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.ly.mvvmbase.model.BaseModel
-import com.ly.mvvmbase.net.ErrorResponse
+import com.ly.mvvmbase.net.ErrorData
 
-abstract class BaseViewModel<T :BaseModel>: AndroidViewModel, BaseModel.OnGetDataListener {
+/**
+ * @author ly
+ * @dscriprtion 基础viewmodel类
+ * @date 2019年10月9日 11:22:51
+ * @version 1.0.0
+ */
+abstract class BaseViewModel<T : BaseModel> : AndroidViewModel, BaseModel.OnGetDataListener {
 
     var model: T? = null
 
-    var errorLiveData: MutableLiveData<ErrorResponse>? = null
+    var errorLiveData: MutableLiveData<ErrorData>? = null
     //初始化 model
     abstract fun initModel(): T
 
     constructor(application: Application) : super(application) {
         model = initModel()
         errorLiveData = MutableLiveData()
-        model?.mOnGetDataListener=this
+        model?.mOnGetDataListener = this
     }
 
     //回收相关对象

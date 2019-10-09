@@ -1,11 +1,16 @@
 package com.ly.mvvmbase.model
 
-import com.ly.mvvmbase.net.BaseResponse
 import com.ly.mvvmbase.net.ErrorData
 import com.ly.mvvmbase.net.SuccessData
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 
+/**
+ * @author ly
+ * @name 基础model类
+ * @description model的基类
+ * @date 2019年10月9日 11:18:07
+ */
 open class BaseModel{
     //
     var mCompositeDisposable: CompositeDisposable? = null

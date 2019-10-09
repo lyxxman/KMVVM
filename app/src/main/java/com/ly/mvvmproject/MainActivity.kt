@@ -22,7 +22,9 @@ class MainActivity : AppCompatActivity() {
 
         mainViewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
         mainViewModel?.errorLiveData?.observeForever {
+            when(it.url){
 
+            }
         }
         mainViewModel?.mainLiveData?.observeForever {
 
