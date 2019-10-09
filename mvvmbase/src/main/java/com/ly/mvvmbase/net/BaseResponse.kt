@@ -6,14 +6,18 @@ package com.ly.mvvmbase.net
 class BaseResponse<T> {
     var code: Int = 0
     var message: String? = null
-    var data:T? = null
-constructor(){
+    var data: T? = null
 
-}
-    constructor(code: Int, message: String, data: T) {
-        this.data = data
+
+    constructor() {
+
     }
 
+    constructor(code: Int, message: String, data: T) {
+        this.data = data
+        this.code = code
+        this.message = message
+    }
     constructor(code: Int, message: String) {
         this.code = code
         this.message = message

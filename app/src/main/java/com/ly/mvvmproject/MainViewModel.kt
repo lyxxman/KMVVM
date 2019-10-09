@@ -33,8 +33,11 @@ class MainViewModel(application: Application) : BaseViewModel<MainModel>(applica
 
 
     override fun onResponse(data: SuccessData) {
+        when(data.url){
+            "sss"->{
+            }
 
-
+        }
     }
 
     override fun onError(data: ErrorData) {
@@ -42,8 +45,8 @@ class MainViewModel(application: Application) : BaseViewModel<MainModel>(applica
     }
 
 
-    fun getMainLs(name:String){
-        model?.getMainList("",name)
+    fun getMainLs(name:String,pageIndex:Int,pageSize:Int){
+        model?.getMainList("",name,false)
     }
 
 
