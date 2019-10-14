@@ -19,16 +19,16 @@ import io.reactivex.schedulers.Schedulers
  * @version 1.0.0
  * @descrpition 封装和retrofit2.0请求返回处理
  */
-class MObservable<T> : ApiObserver{
-    var observable:Observable<BaseResponse<T>>?=null
-    override fun requeest() {
-    }
+class MObservable<T> : ApiObserver {
+    var observable: Observable<BaseResponse<T>>? = null
 
     var loadUrl: String = ""
     var pageIndex: Int = 0
-    constructor(ob:Observable<BaseResponse<T>>){
+
+    constructor(ob: Observable<BaseResponse<T>>) {
         this.observable = ob
     }
+
     init {
         observable?.let {
             it.subscribeOn(Schedulers.io())
@@ -37,34 +37,35 @@ class MObservable<T> : ApiObserver{
 
     }
 
-    fun subscribeX(
+    override fun requeest(
         mCompositeDisposable: CompositeDisposable?,
         mOnGetDataListener: BaseModel.OnGetDataListener?
     ) {
-       observable?.subscribe(object : Observer<BaseResponse<T>> {
-           override fun onNext(t: BaseResponse<T>) {
-               if (pageIndex>0){
-                   mOnGetDataListener?.onResponse(SuccessData(loadUrl, t,pageIndex))
-               }else
-                   mOnGetDataListener?.onResponse(SuccessData(loadUrl, t))
-           }
+        observable?.subscribe(object : Observer<BaseResponse<T>> {
+            override fun onNext(t: BaseResponse<T>) {
+                if (pageIndex > 0) {
+                    mOnGetDataListener?.onResponse(SuccessData(loadUrl, t, pageIndex))
+                } else
+                    mOnGetDataListener?.onResponse(SuccessData(loadUrl, t))
+            }
 
-           override fun onComplete() {
-           }
+            override fun onComplete() {
+            }
 
-           override fun onSubscribe(d: Disposable) {
-               mCompositeDisposable?.add(d)
-           }
+            override fun onSubscribe(d: Disposable) {
+                mCompositeDisposable?.add(d)
+            }
 
-           override fun onError(e: Throwable) {
-               if (pageIndex>0){
-                   mOnGetDataListener?.onError(ExceptionHandler.onError(loadUrl, e,pageIndex))
-               }else{
-                   mOnGetDataListener?.onError(ExceptionHandler.onError(loadUrl, e))
-               }
+            override fun onError(e: Throwable) {
+                if (pageIndex > 0) {
+                    mOnGetDataListener?.onError(ExceptionHandler.onError(loadUrl, e, pageIndex))
+                } else {
+                    mOnGetDataListener?.onError(ExceptionHandler.onError(loadUrl, e))
+                }
 
-           }
-       })
+            }
+        })
     }
+
 
 }

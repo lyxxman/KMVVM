@@ -27,7 +27,7 @@ open class MainModel : BaseModel {
         MObservable(observable).apply {
             pageIndex = mainLsPageIndex
             loadUrl = url
-        }.subscribeX(mCompositeDisposable,mOnGetDataListener)
+        }.requeest(mCompositeDisposable,mOnGetDataListener)
     }
 
 
