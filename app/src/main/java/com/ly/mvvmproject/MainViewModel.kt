@@ -1,6 +1,7 @@
 package com.ly.mvvmproject
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.ly.mvvmbase.model.BaseModel.OnGetDataListener
 import com.ly.mvvmbase.net.ErrorData
@@ -36,7 +37,8 @@ class MainViewModel(application: Application) : BaseViewModel<MainModel>(applica
         }
     }
 
-    override fun onError(data: ErrorData) {
+    override fun onError(data: ErrorData?) {
+        Log.e("error:",data?.message)
        errorLiveData!!.postValue(data)
     }
 

@@ -1,10 +1,6 @@
-package com.ly.mvvmproject.net.request
+package com.ly.mvvmbase.net
 
 import com.ly.mvvmbase.model.BaseModel
-import com.ly.mvvmbase.net.ApiObserver
-import com.ly.mvvmbase.net.BaseResponse
-import com.ly.mvvmbase.net.SuccessData
-import com.ly.mvvmproject.net.exception.ExceptionHandler
 import io.reactivex.Observable
 import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -19,14 +15,15 @@ import io.reactivex.schedulers.Schedulers
  * @version 1.0.0
  * @descrpition 封装和retrofit2.0请求返回处理
  */
-class MObservable<T> : ApiObserver {
+class MObservable<T,R:ImExceptionHandler> : ApiObserver {
     var observable: Observable<BaseResponse<T>>? = null
 
     var loadUrl: String = ""
     var pageIndex: Int = 0
-
-    constructor(ob: Observable<BaseResponse<T>>) {
+    var exceptionHandler:ImExceptionHandler ?=null
+    constructor(ob: Observable<BaseResponse<T>>,e:R) {
         this.observable = ob
+    exceptionHandler = e
     }
 
     init {
@@ -58,9 +55,13 @@ class MObservable<T> : ApiObserver {
 
             override fun onError(e: Throwable) {
                 if (pageIndex > 0) {
-                    mOnGetDataListener?.onError(ExceptionHandler.onError(loadUrl, e, pageIndex))
+                    mOnGetDataListener?.onError(exceptionHandler?.let {
+                     it.onPagingError(loadUrl, e, pageIndex)
+                    })
                 } else {
-                    mOnGetDataListener?.onError(ExceptionHandler.onError(loadUrl, e))
+                    mOnGetDataListener?.onError(exceptionHandler?.let {
+                        it.onError(loadUrl, e)
+                    })
                 }
 
             }

@@ -37,7 +37,7 @@ open class BaseModel{
 
         fun onResponse(data:SuccessData)
 
-        fun onError( data: ErrorData)
+        fun onError( data: ErrorData?)
 
     }
 
