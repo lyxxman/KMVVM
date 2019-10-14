@@ -1,6 +1,7 @@
 package com.ly.mvvmproject.net.request
 
 import com.ly.mvvmbase.model.BaseModel
+import com.ly.mvvmbase.net.ApiObserver
 import com.ly.mvvmbase.net.BaseResponse
 import com.ly.mvvmbase.net.SuccessData
 import com.ly.mvvmproject.net.exception.ExceptionHandler
@@ -18,44 +19,52 @@ import io.reactivex.schedulers.Schedulers
  * @version 1.0.0
  * @descrpition 封装和retrofit2.0请求返回处理
  */
-class MObservable<T> : Observable<BaseResponse<T>>() {
-    var loadUrl: String = ""
-    var pageIndex: Int = 0
-    override fun subscribeActual(observer: Observer<in BaseResponse<T>>?) {
+class MObservable<T> : ApiObserver{
+    var observable:Observable<BaseResponse<T>>?=null
+    override fun requeest() {
     }
 
+    var loadUrl: String = ""
+    var pageIndex: Int = 0
+    constructor(ob:Observable<BaseResponse<T>>){
+        this.observable = ob
+    }
     init {
-        subscribeOn(Schedulers.io())
-        observeOn(AndroidSchedulers.mainThread())
+        observable?.let {
+            it.subscribeOn(Schedulers.io())
+            it.observeOn(AndroidSchedulers.mainThread())
+        }
+
     }
 
     fun subscribeX(
         mCompositeDisposable: CompositeDisposable?,
         mOnGetDataListener: BaseModel.OnGetDataListener?
     ) {
-        subscribe(object : Observer<BaseResponse<T>> {
-            override fun onNext(t: BaseResponse<T>) {
-                if (pageIndex>0){
-                    mOnGetDataListener?.onResponse(SuccessData(loadUrl, t,pageIndex))
-                }else
-                mOnGetDataListener?.onResponse(SuccessData(loadUrl, t))
-            }
+       observable?.subscribe(object : Observer<BaseResponse<T>> {
+           override fun onNext(t: BaseResponse<T>) {
+               if (pageIndex>0){
+                   mOnGetDataListener?.onResponse(SuccessData(loadUrl, t,pageIndex))
+               }else
+                   mOnGetDataListener?.onResponse(SuccessData(loadUrl, t))
+           }
 
-            override fun onComplete() {
-            }
+           override fun onComplete() {
+           }
 
-            override fun onSubscribe(d: Disposable) {
-                mCompositeDisposable?.add(d)
-            }
+           override fun onSubscribe(d: Disposable) {
+               mCompositeDisposable?.add(d)
+           }
 
-            override fun onError(e: Throwable) {
-                if (pageIndex>0){
-                    mOnGetDataListener?.onError(ExceptionHandler.onError(loadUrl, e,pageIndex))
-                }else{
-                    mOnGetDataListener?.onError(ExceptionHandler.onError(loadUrl, e))
-                }
+           override fun onError(e: Throwable) {
+               if (pageIndex>0){
+                   mOnGetDataListener?.onError(ExceptionHandler.onError(loadUrl, e,pageIndex))
+               }else{
+                   mOnGetDataListener?.onError(ExceptionHandler.onError(loadUrl, e))
+               }
 
-            }
-        })
+           }
+       })
     }
+
 }

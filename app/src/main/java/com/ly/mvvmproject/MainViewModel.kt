@@ -41,8 +41,8 @@ class MainViewModel(application: Application) : BaseViewModel<MainModel>(applica
     }
 
 
-    fun getMainLs(name:String,pageIndex:Int,pageSize:Int){
-        model?.getMainList("",name,false)
+    fun getMainLs(){
+        model?.getMainList("sss",false)
     }
 
 

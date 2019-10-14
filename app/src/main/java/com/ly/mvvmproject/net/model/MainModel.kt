@@ -2,6 +2,8 @@ package com.ly.mvvmproject.net.model
 
 import com.ly.mvvmbase.model.BaseModel
 import com.ly.mvvmbase.net.NetRetroift2
+import com.ly.mvvmproject.net.bean.MainData
+import com.ly.mvvmproject.net.request.MObservable
 import com.ly.mvvmproject.net.service.MainService
 
 open class MainModel : BaseModel {
@@ -10,17 +12,22 @@ open class MainModel : BaseModel {
     var mainLsPageIndex = 1
 
     constructor(
-        mainService: MainService = NetRetroift2.mInstance.createService(MainService::class.java)
-    )
+    ) {
+        mainService = NetRetroift2.mInstance.createService(MainService::class.java)
+    }
 
 
-    fun getMainList(url: String, name: String, loadMore: Boolean) {
-        mainLsPageIndex = if (loadMore) { +1 } else { 1}
-        val observable = mainService!!.getDataList(name, mainLsPageIndex, mainLsPageSize)
-        observable.apply {
-            loadUrl = url
+    fun getMainList(url: String, loadMore: Boolean) {
+        mainLsPageIndex = if (loadMore) {
+            +1
+        } else {
+            1
+        }
+        val observable = mainService!!.getAllBill(mainLsPageIndex, mainLsPageSize)
+        MObservable(observable).apply {
             pageIndex = mainLsPageIndex
-        }.subscribeX(mCompositeDisposable, mOnGetDataListener)
+            loadUrl = url
+        }.subscribeX(mCompositeDisposable,mOnGetDataListener)
     }
 
 

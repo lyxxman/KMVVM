@@ -3,15 +3,13 @@ package com.ly.mvvmproject.net.service
 import com.ly.mvvmbase.net.BaseResponse
 import com.ly.mvvmproject.net.request.MObservable
 import com.ly.mvvmproject.net.bean.MainData
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.POST
+import io.reactivex.Observable
+import retrofit2.http.*
 
 interface MainService {
 
-    @FormUrlEncoded
-    @POST("main")
-    fun getDataList(@Field("name") name: String,@Field("pageIndex")pageIndex:Int,@Field("pageSize")pageSize:Int): MObservable<MutableList<MainData>>
+    @GET("bill/getBills")
+    fun getAllBill(@Query("pageIndex") pageIndex: Int, @Query("pageSize") pageSize: Int): Observable<BaseResponse<MutableList<MainData>>>
 
 
 }
